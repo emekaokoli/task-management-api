@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { config } from '../config/default';
-import { findUserById } from '../models/user';
+import { findUserById } from '../service/user';
 import { ResponseBuilder } from '../utils/responseBuilder';
 
 const { accessTokenPublicKey } = config;

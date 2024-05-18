@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --detectOpenHandles --watchAll",
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "lint": "eslint src --ext .ts",
+    "lint-fix": "eslint . --ext .ts --fix",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -41,5 +44,8 @@
     "ts-jest": "^29.1.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": "20"
   }
 }

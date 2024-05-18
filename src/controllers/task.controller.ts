@@ -1,13 +1,13 @@
 import { Response } from 'express';
 import { AuthenticatedRequest } from '../../type';
 import { io } from '../app';
+import { taskSchema } from '../schema/request.schema';
 import {
   createTask,
   deleteTask,
   getTasksByUserId,
   updateTask,
-} from '../models/task';
-import { taskSchema } from '../schema/request.schema';
+} from '../service/task';
 import { ResponseBuilder } from '../utils/responseBuilder';
 
 export const createTaskHandler = async (
@@ -35,11 +35,9 @@ export const getTasksHandler = async (
 ) => {
   try {
     const tasks = await getTasksByUserId(Number(req?.user?.id));
-    
+
     // Emit the task creation event
     io.emit('taskCreated', tasks);
-    console.log({TASKCREATED:  tasks});
-    
 
     return ResponseBuilder.success(res, 200, { tasks });
   } catch (err: any) {

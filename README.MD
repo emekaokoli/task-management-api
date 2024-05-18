@@ -33,10 +33,6 @@ src
  ┃ ┣ errorHandler.ts
  ┃ ┣ openApiValidatorError.ts
  ┃ ┗ requireUser.ts
- ┣ models
- ┃ ┣ queries.ts
- ┃ ┣ task.ts
- ┃ ┗ user.ts
  ┣ module
  ┃ ┗ setupRoutes.ts
  ┣ routes
@@ -45,6 +41,10 @@ src
  ┃ ┗ task.routes.ts
  ┣ schema
  ┃ ┗ request.schema.ts
+ ┣ service
+ ┃ ┣ queries.ts
+ ┃ ┣ task.ts
+ ┃ ┗ user.ts
  ┣ types
  ┃ ┣ Task.ts
  ┃ ┗ User.ts
@@ -65,7 +65,7 @@ src
 
 1. Clone the repository:
 
-git clone https://github.com/yourusername/task-management-api.git
+git clone https://github.com/emekaokoli/task-management-api.git
 cd task-management-api
 
 2. Install dependencies:
@@ -73,29 +73,44 @@ cd task-management-api
 `npm install`
 
 3. Create a .env file in the root directory and add environment variables:
+sample .env file
 
+```bash
 PORT=3000
 DATABASE_URL=postgres://user:password@localhost:5432/taskdb
-JWT_SECRET=your_jwt_secret
+```
 
-# Running the Application
+4. Start the server:
 
-1. Build and start the containers:
+`npm run dev`
+
+## Docker
+
+1. Build the Docker image:
+
+`docker-compose build`
+
+2. Start the containers:
+
+`docker-compose up`
+or 
 `docker-compose up --build`
+`
 
-2. The API will be accessible at http://localhost:3000.
+3. The API will be accessible at http://localhost:3000/api/tasks
 
 # Without Docker
 
 1. Start PostgreSQL and create a database:
- the database table and users tables are created/mirgated as soon as the app starts running, you only need to register and login a user use the token in your postman collection. i used [thunderbolt for vscode](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)
-I have added the collection in the root directory of this repo ![](./thunder-collection_niyo_group.json).
+ the tasks and users tables are created/mirgated as soon as the app starts running, you only need to register and login a user use the token in your postman collection. I used [thunderbolt for vscode](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)
+I have added the collection in the root directory of this repo ![](./thunder-collection_niyo_group.json), you can use postman if you.
 
 2.  Install dependencies:
 
 `npm install`
 
 3.  Start the server:
+
 `npm run dev`
 
 # Test
@@ -111,4 +126,4 @@ I have added the collection in the root directory of this repo ![](./thunder-col
 
 ## Design flow
 
-![](./diagrams/data-flow.pnn)
+![](./diagrams/data-flow.png)

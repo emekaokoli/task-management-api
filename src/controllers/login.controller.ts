@@ -2,8 +2,8 @@ import bcrypt from 'bcryptjs';
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { config } from '../config/default';
-import { findUserByUsername } from '../models/user';
 import { userSchema } from '../schema/request.schema';
+import { findUserByUsername } from '../service/user';
 import { ResponseBuilder } from '../utils/responseBuilder';
 
 const { accessTokenPrivateKey } = config;

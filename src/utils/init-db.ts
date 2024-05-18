@@ -1,4 +1,4 @@
-import { tasks } from '../models/queries';
+import { tasks } from '../service/queries';
 import pool from './db';
 
 export const createTables = async () => {

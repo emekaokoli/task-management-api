@@ -18,9 +18,14 @@ beforeAll(async () => {
     .post('/api/register')
     .send({ username: 'testuser', password: 'password123' })
     .expect(201)
-    .then((response) => {
-      token = response.body.data.token;
-    });
+   
+    await request(app)
+      .post('/api/login')
+      .send({ username: 'testuser', password: 'password123' })
+      .expect(200)
+      .then((response) => {
+        token = response.body.data.token;
+      });
 });
 
 afterAll(async () => {

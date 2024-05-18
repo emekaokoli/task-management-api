@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://test:iASK5B0KirkNoh4wZ5seDolvZjEwya8O@db:5432/test_n6um
+      - PORT=3000
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: iASK5B0KirkNoh4wZ5seDolvZjEwya8O
+      POSTGRES_DB: test_n6um
+    ports:
+      - "5432:5432"
