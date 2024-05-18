@@ -99,11 +99,11 @@ or
 
 3. The API will be accessible at http://localhost:3000/api/tasks
 
-# Without Docker
+## Without Docker
 
 1. Start PostgreSQL and create a database:
  the tasks and users tables are created/mirgated as soon as the app starts running, you only need to register and login a user use the token in your postman collection. I used [thunderbolt for vscode](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)
-I have added the collection in the root directory of this repo ![](./thunder-collection_niyo_group.json), you can use postman if you.
+I have added the collection in the root directory of this repo [thunderbolt collection](./thunder-collection_niyo_group.json), you can use postman if you like.
 
 2.  Install dependencies:
 
@@ -113,11 +113,17 @@ I have added the collection in the root directory of this repo ![](./thunder-col
 
 `npm run dev`
 
-# Test
+4. register a user
+
+5. login the registered user.
+
+6.  use the token of the logged-in user to test the endpoints
+
+## Test
 
 `npm run jest`
 
-# Documentation
+## Documentation
 
 1. Start your server 
 `npm run dev` 
