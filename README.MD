@@ -69,7 +69,7 @@ src
 git clone https://github.com/emekaokoli/task-management-api.git
 ```
 ```
-cd into the "task-management-api" directory
+cd task-management-api
 
 ```
 2. Install dependencies:
