@@ -67,7 +67,6 @@ src
 1. Clone the repository:
 ```
 git clone https://github.com/emekaokoli/task-management-api.git
-cd task-management-api
 ```
 ```
 cd into the "task-management-api" directory
