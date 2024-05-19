@@ -1,4 +1,4 @@
-// Data Definition Language queries - defines the structure of the database tables.
+// the structure of the database tables.
 
 export const tasks = {
   createTable: `

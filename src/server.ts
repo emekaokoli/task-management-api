@@ -6,7 +6,7 @@ import { logger } from './utils/logger';
 
 dotenv.config();
 
-const port = process.env.PORT || 1487;
+const port = process.env.PORT || 3000;
 
 // HTTP server
 const server = http.createServer((req, res) => {

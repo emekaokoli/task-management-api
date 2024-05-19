@@ -1,6 +1,5 @@
 # Task Management API
-A simple RESTful API for managing tasks. It includes user authentication, CRUD operations for tasks, data persistence using PostgreSQL, and input validation with Zod.
-
+The Task Management API is a simple RESTful API for managing tasks. It includes features such as user authentication, CRUD operations for tasks, data persistence using PostgreSQL, and input validation with Zod.
 
 ## Features
 - User Authentication with JWT
@@ -8,6 +7,8 @@ A simple RESTful API for managing tasks. It includes user authentication, CRUD o
 - Input validation using Zod
 - Data persistence with PostgreSQL
 - Comprehensive API documentation with Swagger
+
+I leveraged dependency injection for the App and controller layer, which allowed me to easily carryout end-to-end test the controllers without having to mock the dependencies.
 
 Prerequisites
 - Node.js (v18.x or later)
@@ -18,6 +19,7 @@ Prerequisites
 - Docker (optional, for running the application in a container)
 
 ## Project Directory
+The project directory includes various subdirectories for config, controllers, middlewares, modules, routes, schemas, services, types, utils, tests, and main application and server files.
 
 ```bash
 src
@@ -62,73 +64,79 @@ src
 ```
 
 ## Installation
-
 1. Clone the repository:
-
+```
 git clone https://github.com/emekaokoli/task-management-api.git
 cd task-management-api
+```
+```
+cd into the "task-management-api" directory
 
+```
 2. Install dependencies:
-
-`npm install`
-
-3. Create a .env file in the root directory and add environment variables:
-sample .env file
-
-```bash
+```
+npm install
+```
+3. Create a .env file in the root directory and add environment variables into .env file:
+```
 PORT=3000
-DATABASE_URL=postgres://user:password@localhost:5432/taskdb
+EXTERNAL_DATABASE_URL=postgres://user:password@localhost:5432/taskdb
+```
+4. Start the server:
+```
+npm run dev
 ```
 
-4. Start the server:
-
-`npm run dev`
-
-## Docker
-
+## Run it with Docker
 1. Build the Docker image:
-
-`docker-compose build`
-
+```
+docker-compose build
+```
 2. Start the containers:
-
-`docker-compose up`
-or 
-`docker-compose up --build`
-`
-
+```
+docker-compose up
+```
+or a single command that does both
+```
+docker-compose up --build
+```
 3. The API will be accessible at http://localhost:3000/api/tasks
 
 ## Without Docker
+1. Start PostgreSQL and create a database.
+2. Install dependencies:
+```
+npm install
+```
+3. Create a .env file in the root directory and add environment variables into .env file:
+```
+PORT=3000
+EXTERNAL_DATABASE_URL=postgres://user:password@localhost:5432/testdb
+```
+4. Start the server:
+```
+npm run dev
+```
+5. Register a user.
+6. Login the registered user.
+7. Use the token of the logged-in user to test the endpoints.
 
-1. Start PostgreSQL and create a database:
- the tasks and users tables are created/mirgated as soon as the app starts running, you only need to register and login a user use the token in your postman collection. I used [thunderbolt for vscode](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)
-I have added the collection in the root directory of this repo [thunderbolt collection](./thunder-collection_niyo_group.json), you can use postman if you like.
-
-2.  Install dependencies:
-
-`npm install`
-
-3.  Start the server:
-
-`npm run dev`
-
-4. register a user
-
-5. login the registered user.
-
-6.  use the token of the logged-in user to test the endpoints
+## Note
+I used [thunderbolt ](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client) for vscode I have also added the [collection](./thunder-collection_niyo_group.json) in the root directory of this repo.
 
 ## Test
-
-`npm run jest`
+To run tests:
+```
+npm run jest
+```
 
 ## Documentation
+1. Start your server:
+```
+npm run dev
+```
+2. Navigate to http://localhost:3000/api/docs to view the generated Swagger documentation.
 
-1. Start your server 
-`npm run dev` 
-
-2. navigate to http://localhost:3000/api/docs to view the generated Swagger 
 
 ## Design flow
 
