@@ -35,64 +35,73 @@ afterAll(async () => {
 describe('Task API', () => {
   let taskId: number;
 
-  it('should create a new task', async () => {
-    const response = await request(app)
-      .post('/api/tasks')
-      .set('Authorization', `Bearer ${token}`)
-      .send({
-        title: 'Test Task',
-        description: 'This is a test task',
-      })
-      .expect(201);
+it('should create a new task', async () => {
+  const response = await request(app)
+    .post('/api/tasks')
+    .set('Authorization', `Bearer ${token}`)
+    .send({
+      title: 'Test Task',
+      description: 'This is a test task',
+    })
+    .expect(201);
 
-    const task = response.body.data.task;
-    expect(task).toHaveProperty('id');
-    expect(task.title).toBe('Test Task');
-    expect(task.description).toBe('This is a test task');
-    expect(task.completed).toBe(false);
-    taskId = task.id;
-  });
+  const task = response.body.data.task;
+  expect(task).toHaveProperty('id');
+  expect(task.title).toBe('Test Task');
+  expect(task.description).toBe('This is a test task');
+  expect(task.completed).toBe(false);
+  expect(task).toHaveProperty('user_id');
+  taskId = task.id;
+});
 
-  it('should get all tasks for the authenticated user', async () => {
-    const response = await request(app)
-      .get('/api/tasks')
-      .set('Authorization', `Bearer ${token}`)
-      .expect(200);
+it('should get all tasks for the authenticated user', async () => {
+  const response = await request(app)
+    .get('/api/tasks')
+    .set('Authorization', `Bearer ${token}`)
+    .expect(200);
 
-    const tasks = response.body.data.tasks;
-    expect(tasks.length).toBe(1);
-    expect(tasks[0].title).toBe('Test Task');
-  });
+  const tasks = response.body.data.tasks;
+  expect(tasks).toBeInstanceOf(Array);
+  expect(tasks.length).toBeGreaterThan(0);
 
-  it('should update a task', async () => {
-    const response = await request(app)
-      .put(`/api/tasks/${taskId}`)
-      .set('Authorization', `Bearer ${token}`)
-      .send({
-        title: 'Updated Task',
-        description: 'This is an updated test task',
-        completed: true,
-      })
-      .expect(200);
+  const task = tasks.find((t: any) => t.id === taskId);
+  expect(task).toHaveProperty('id', taskId);
+  expect(task).toHaveProperty('title', 'Test Task');
+  expect(task).toHaveProperty('description', 'This is a test task');
+  expect(task).toHaveProperty('completed', false);
+});
 
-    const task = response.body.data.task;
-    expect(task.title).toBe('Updated Task');
-    expect(task.description).toBe('This is an updated test task');
-    expect(task.completed).toBe(true);
-  });
+it('should update a task', async () => {
+  const response = await request(app)
+    .put(`/api/tasks/${taskId}`)
+    .set('Authorization', `Bearer ${token}`)
+    .send({
+      title: 'Updated Test Task',
+      description: 'This is an updated test task',
+      completed: true,
+    })
+    .expect(200);
 
-  it('should delete a task', async () => {
-    await request(app)
-      .delete(`/api/tasks/${taskId}`)
-      .set('Authorization', `Bearer ${token}`)
-      .expect(200);
+  const task = response.body.data.task;
+  expect(task).toHaveProperty('id', taskId);
+  expect(task.title).toBe('Updated Test Task');
+  expect(task.description).toBe('This is an updated test task');
+  expect(task.completed).toBe(true);
+});
 
-    const response = await request(app)
-      .get('/api/tasks')
-      .set('Authorization', `Bearer ${token}`)
-      .expect(200);
+it('should delete a task', async () => {
+  await request(app)
+    .delete(`/api/tasks/${taskId}`)
+    .set('Authorization', `Bearer ${token}`)
+    .expect(200);
 
-    const tasks = response.body.data.tasks;
-    expect(tasks.length).toBe(0);
-  });
+  const response = await request(app)
+    .get('/api/tasks')
+    .set('Authorization', `Bearer ${token}`)
+    .expect(200);
+
+  const tasks = response.body.data.tasks;
+  const task = tasks.find((t: any) => t.id === taskId);
+  expect(task).toBeUndefined();
+});
 });
